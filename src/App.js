@@ -16,11 +16,6 @@ import MomentPage from './pages/MomentPage';
 import MediaDetailPage from './pages/MediaDetailPage';
 import SignUpPage from './pages/SignUpPage';
 
-import {Amplify} from "aws-amplify";
-import awsmobile from './aws-exports';
-
-Amplify.configure(awsmobile)
-
 const App = () => (
 <BrowserRouter>
   <RecoilRoot>
