@@ -17,7 +17,7 @@ export default function MyBanner() {
   return (
     <MyBannerWraper>
       <BannerText>
-        계정명 : ---------- <br />
+        계정명 : <br />
         <br />
         가입 이메일 주소 : -------------
       </BannerText>

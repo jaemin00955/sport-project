@@ -16,7 +16,7 @@ import MomentPage from './pages/MomentPage';
 import MediaDetailPage from './pages/MediaDetailPage';
 
 import { Amplify } from "aws-amplify"
-import awsmobile from "../src/aws-exports"
+import awsmobile from "./aws-exports"
 import { Authenticator } from '@aws-amplify/ui-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
