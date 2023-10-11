@@ -1,0 +1,7 @@
+{
+  "httpMethod": "GET",
+  "path": "/post/arsenal",
+  "headers": {
+    "Content-Type": "application/json"
+  }
+}

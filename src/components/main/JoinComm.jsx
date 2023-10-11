@@ -3,59 +3,77 @@ import {
   Avatar,
   FollowBtn,
   JoinText,
-  JoinWraper,
+  JoinLayout,
   LeagueName,
   SeeAllText,
   TeamMember,
   TeamName,
-  TeamWraper,
+  TeamContainer,
+  Line,
 } from "../../styles/main/JoinComm.style";
-import { Line } from "../../styles/shared/Carousel.style";
-// import { Avatar } from "../../styles/PostModal.style";
-const dummyList = [
-  {
-    author: "hyun",
-    content: "첫번째",
-    emotion: 1,
-  },
-  {
-    author: "jeong",
-    content: "두번째",
-    emotion: 2,
-  },
-  {
-    author: "react",
-    content: "3번째",
-    emotion: 3,
-  },
-  {
-    author: "react",
-    content: "3번째",
-    emotion: 3,
-  },
-  {
-    author: "react",
-    content: "3번째",
-    emotion: 3,
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { SlUserFollow } from "react-icons/sl";
+import { API } from "aws-amplify";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
+const selectIndex = (totalIndex, selectingNumber) => {
+  let randomIndexArray = [];
+  for (let i = 0; i < selectingNumber; i++) {
+    const randomNum = Math.floor(Math.random() * totalIndex) + 1;
+    if (randomIndexArray.indexOf(randomNum) === -1) {
+      randomIndexArray.push(randomNum);
+    } else {
+      i--;
+    }
+  }
+  return randomIndexArray;
+};
 
 export default function JoinComm() {
+  const navigate = useNavigate();
+  // const queryClient = useQueryClient();
+  // const teamUrl = queryClient.getQueryData(["team"]);
+
+  const getGroupData = async () => {
+    const temp = [];
+    const randomList = selectIndex(5, 5);
+    for (let i = 0; i < 5; i++) {
+      const tempObj = {};
+      const groupData = await API.get("groupApi", `/group/${randomList[i]}`);
+      tempObj.name = groupData[0].teamName;
+      tempObj.url = groupData[0].teamUrl;
+      temp.push(tempObj);
+    }
+    return temp;
+  };
+  const { data, isFetching } = useQuery(["group"], getGroupData, {
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
+
+  if (isFetching) return;
+
   return (
-    <JoinWraper>
+    <JoinLayout>
       <JoinText className="joinText">Join Community</JoinText>
       <Line />
-      <TeamWraper className="teamMember">
-        {dummyList.map((it, index) => (
+      <TeamContainer>
+        {data.map((it, index) => (
           <TeamMember key={index}>
-            <Avatar className="avatar"></Avatar>
-            <TeamName className="name">{it.author}</TeamName>
-            <LeagueName className="league">{it.content}</LeagueName>
-            <FollowBtn className="followBtn" alt="FollowBtn" />
+            <Avatar $url={it.url}></Avatar>
+            <TeamName>{it.name}</TeamName>
+            <LeagueName>{it.name}</LeagueName>
+            <FollowBtn as={SlUserFollow} />
           </TeamMember>
         ))}
-      </TeamWraper>
-      <SeeAllText className="see">See All +(Text)</SeeAllText>
-    </JoinWraper>
+      </TeamContainer>
+      <SeeAllText
+        onClick={() => {
+          navigate("/follow");
+        }}
+      >
+        See All + Team
+      </SeeAllText>
+    </JoinLayout>
   );
 }

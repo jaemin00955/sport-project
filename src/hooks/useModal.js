@@ -15,9 +15,10 @@ export const useModal = () => {
   );
 
   const openModal = useCallback(
-    () =>
+    (id) =>
       setModalDataState({
         isOpen: true,
+        id : id,
       }),
     [setModalDataState]
   );

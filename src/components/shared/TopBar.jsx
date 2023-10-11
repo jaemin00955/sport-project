@@ -1,10 +1,56 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useAuthenticator } from "@aws-amplify/ui-react";
+
+import {
+  AiOutlineSearch,
+  AiOutlineNotification,
+  AiOutlineLogin,
+  AiOutlineLogout,
+} from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
+import {
+  Login,
+  Logo,
+  MyProfile,
+  NavBar,
+  Noti,
+  Search,
+  Line,
+  Logout,
+  SearchInput,
+} from "../../styles/shared/TopBar.style";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRecoilState } from "recoil";
+import { userState } from "../../states/stateUser";
 
 export default function TopBar() {
   const navigate = useNavigate();
+  const { authStatus } = useAuthenticator((context) => [context.authStatus]);
+  const { signOut } = useAuthenticator((context) => [context.user]);
+  const [userIdState, setUserIdState] = useRecoilState(userState);
+  const queryClient = useQueryClient();
+  const options = [];
 
+  const signOutEvent = () => {
+    signOut();
+    setUserIdState({ userId: "" });
+    console.log("userIdState:::", userIdState);
+  };
+  // const teamUrl = queryClient.getQueryData(["info"]);
+  // const groupData = API.get("groupApi", `/group/${randomList[i]}`);
+  // if (teamUrl) {
+  //   const t = () => {
+  //     teamUrl.map((data) => {
+  //       const teamName = Object.keys(data)[0];
+  //       const tempObj = {};
+  //       tempObj.id = teamName;
+  //       tempObj.label = teamName;
+  //       options.push(tempObj);
+  //     });
+  //   };
+  //   t();
+  // }
   return (
     <NavBar>
       <Logo
@@ -14,104 +60,31 @@ export default function TopBar() {
           navigate("/");
         }}
       ></Logo>
-      <Home
-        alt="home"
-        src={process.env.PUBLIC_URL + "/img/home.png"}
-        onClick={() => {
-          navigate("/");
-        }}
-      ></Home>
-
-      <Noti
-        alt="notification"
-        src={process.env.PUBLIC_URL + "/img/noti.png"}
-      ></Noti>
-      <Search
-        alt="search"
-        src={process.env.PUBLIC_URL + "/img/search.png"}
-      ></Search>
-      <Line />
-      <Face
-        alt="Face id recognition"
-        src={process.env.PUBLIC_URL + "/img/face.png"}
-        onClick={() => {
-          navigate("/login");
-        }}
-      ></Face>
-      <Face2
-        alt="Face id recognition"
-        src={process.env.PUBLIC_URL + "/img/face.png"}
-        onClick={() => {
-          navigate("/mypage");
-        }}
-      ></Face2>
+      {authStatus === "authenticated" && (
+        <Logout as={AiOutlineLogout} onClick={signOutEvent} />
+      )}
+      <SearchInput
+        label="Default autocomplete"
+        options={options}
+        placeholder="팀 검색"
+      />
+      {/* <Search as={AiOutlineSearch} /> */}
+      <Noti as={AiOutlineNotification} />
+      {authStatus === "authenticated" ? (
+        <MyProfile
+          as={CgProfile}
+          onClick={() => {
+            navigate("/mypage");
+          }}
+        />
+      ) : (
+        <Login
+          as={AiOutlineLogin}
+          onClick={() => {
+            navigate("/login");
+          }}
+        />
+      )}
     </NavBar>
   );
 }
-
-const NavBar = styled.div`
-  background-color: #ffffff;
-  height: 10%;
-  position: fixed;
-  width: 100%;
-  z-index: 999;
-`;
-const Logo = styled.img`
-  left: 3vw;
-  top: 2.5vh;
-  position: absolute;
-  width: 180px;
-  height: 40px;
-  @media screen and (max-width: 500px) {
-    // 미디어 쿼리 부분 - 수정하면 된다~
-    display: none;
-  }
-`;
-const Home = styled.img`
-  object-fit: cover;
-  right: 23vw;
-  top: 2.5vh;
-  position: absolute;
-  width: 2.5vw;
-  height: 4.5vh;
-`;
-const Search = styled.img`
-  object-fit: cover;
-  right: 18vw;
-  top: 2.5vh;
-  position: absolute;
-  width: 2.5vw;
-  height: 4.5vh;
-`;
-const Noti = styled.img`
-  object-fit: cover;
-  right: 13vw;
-  top: 2.5vh;
-  position: absolute;
-  width: 2.5vw;
-  height: 4.5vh;
-`;
-const Line = styled.hr`
-  object-fit: cover;
-  right: 10vw;
-  top: 1.5vh;
-  position: absolute;
-  border-left: thin solid #000000;
-  height: 4%;
-`;
-const Face = styled.img`
-  object-fit: cover;
-  right: 4vw;
-  top: 2.5vh;
-  position: absolute;
-  width: 2.5vw;
-  height: 4.5vh;
-`;
-const Face2 = styled.img`
-  object-fit: cover;
-  right: 7vw;
-  top: 2.5vh;
-  position: absolute;
-  width: 2.5vw;
-  height: 4.5vh;
-`;

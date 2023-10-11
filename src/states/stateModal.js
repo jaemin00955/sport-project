@@ -5,7 +5,6 @@ export const modalState = atom({
   key: "modalState",
   default: {
     isOpen: false,
-    title: "",
-    content: "",
+    id : ''
   },
 });

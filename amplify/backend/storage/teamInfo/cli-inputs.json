@@ -1,0 +1,10 @@
+{
+  "resourceName": "teamInfo",
+  "tableName": "teamInfo",
+  "partitionKey": {
+    "fieldName": "teamId",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

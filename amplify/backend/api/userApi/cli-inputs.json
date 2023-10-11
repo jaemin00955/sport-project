@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "paths": {
+    "/user": {
+      "name": "/user",
+      "lambdaFunction": "userLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/info": {
+      "name": "/info",
+      "lambdaFunction": "infoLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/team": {
+      "name": "/team",
+      "lambdaFunction": "teamLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

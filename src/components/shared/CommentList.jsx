@@ -19,7 +19,6 @@ import {
   MediaDetailComment,
   ModalInputComment,
 } from "../../styles/shared/CommentList.style";
-import InfinityScroll from "../../utils/InfinityScroll";
 
 const getCurrentScrollPercentage = () => {
   return (
@@ -28,14 +27,12 @@ const getCurrentScrollPercentage = () => {
 };
 
 export default function CommentList() {
-  const { posts } = InfinityScroll();
   console.log(getCurrentScrollPercentage());
   return (
     <MediaDetailComment>
-      {/* <MediaDetailComment position={getCurrentScrollPercentage()}> */}
       <CommentTotalNum>1000개의 댓글</CommentTotalNum>
       <Container>
-        {posts.map((post, idx) => {
+        {/* {posts.map((post, idx) => {
           return (
             <CommentItem>
               <CommentAvatar></CommentAvatar>
@@ -67,7 +64,7 @@ export default function CommentList() {
               <CommentNum>16</CommentNum>
             </CommentItem>
           );
-        })}
+        })} */}
       </Container>
       <CommentDivider></CommentDivider>
       <ModalInputComment className="inputComment">

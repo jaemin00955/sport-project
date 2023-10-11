@@ -1,0 +1,10 @@
+{
+  "resourceName": "contents",
+  "tableName": "contents",
+  "partitionKey": {
+    "fieldName": "postId",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

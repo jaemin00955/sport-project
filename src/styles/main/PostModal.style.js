@@ -1,3 +1,4 @@
+import { Button } from "@aws-amplify/ui-react";
 import styled from "styled-components";
 
 export const ModalDimmer = styled.div`
@@ -13,7 +14,7 @@ export const ModalDimmer = styled.div`
   align-items: center;
   overflow-x: hidden;
 `;
-export const ModalBody = styled.div`
+export const ModalLayout = styled.div`
   // position: absolute;
   display: flex;
   width:80vw;
@@ -34,7 +35,7 @@ export const ModalLeft = styled.div`
 `
 
 ///// 모달 컨텐츠 부분 시작 /////
-export const ModalContents = styled.div`
+export const ModalContainer = styled.div`
   position: absolute;
   width:97%;
   height:90%;
@@ -43,6 +44,7 @@ export const ModalContents = styled.div`
 `;
 
 export const Avatar = styled.div`
+  background-image: url(${props=>props.$url});
   position: absolute;
   background-color: #000000;
   border-radius: 50%;
@@ -90,8 +92,12 @@ export const ContentWraper = styled.div`
   box-shadow: 2px 2px 5px 5px black;
   `
 export const Image = styled.img`
-  border-radius: 10vw;
-  width: 100%; 
+  background-image: url(${props=>props.$url});
+  border-radius: 3vw;
+  width: 90%; 
+  height:50%;
+  margin : 0 auto;
+  margin-top : 3vh;
 `;
 export const MainText = styled.p`
   color: #000000;
@@ -101,7 +107,8 @@ export const MainText = styled.p`
   letter-spacing: 0;
   line-height: 3vh;
   width: 90%; 
-  margin-left:2.5vw;
+  margin : 0 auto;
+  margin-top : 3vh;
   word-wrap: break-word;
 `;
 ///// 모달 컨텐츠 부분 끝 /////
@@ -151,6 +158,13 @@ export const CommentTotalNum = styled.div`
   font-family: "Nunito Sans", Helvetica;
   font-size: 1.8rem;
   font-weight: 900;
+`
+export const CancelBtn = styled(Button)`
+position:absolute;
+left:19vw;
+top:1vh;
+width:5vw;
+height:5vh;
 `
 export const ModalComments = styled.div`
   border-bottom: 3px solid #cbcbcb;

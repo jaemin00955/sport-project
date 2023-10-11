@@ -1,0 +1,70 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify38c7649082d74-staging-120302-authRole",
+      "UnauthRoleArn": "arn:aws:iam::983027402055:role/amplify-amplify38c7649082d74-staging-120302-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::983027402055:role/amplify-amplify38c7649082d74-staging-120302-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+      "UnauthRoleName": "amplify-amplify38c7649082d74-staging-120302-unauthRole",
+      "StackName": "amplify-amplify38c7649082d74-staging-120302",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:983027402055:stack/amplify-amplify38c7649082d74-staging-120302/a4aeace0-5c64-11ee-9346-06451f936874",
+      "AmplifyAppId": "d292xdmkm6in46"
+    },
+    "categories": {
+      "function": {
+        "userLambda": {
+          "deploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+          "s3Key": "amplify-builds/userLambda-6777746c546256682b44-build.zip"
+        },
+        "infoLambda": {
+          "deploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+          "s3Key": "amplify-builds/infoLambda-616e5a56772f59732b7a-build.zip"
+        },
+        "teamLambda": {
+          "deploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+          "s3Key": "amplify-builds/teamLambda-34663745734e47547642-build.zip"
+        },
+        "groupLambda": {
+          "deploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+          "s3Key": "amplify-builds/groupLambda-4565344e364a68564c4f-build.zip"
+        },
+        "commentLambda": {
+          "deploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+          "s3Key": "amplify-builds/commentLambda-384f713571734e496770-build.zip"
+        },
+        "postLambda": {
+          "deploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+          "s3Key": "amplify-builds/postLambda-756e4143693977654d39-build.zip"
+        },
+        "contentLambda": {
+          "deploymentBucketName": "amplify-amplify38c7649082d74-staging-120302-deployment",
+          "s3Key": "amplify-builds/contentLambda-45475274673853505650-build.zip"
+        }
+      },
+      "storage": {
+        "user": {},
+        "info": {},
+        "teamInfo": {},
+        "group": {},
+        "comment": {},
+        "post": {},
+        "contents": {}
+      },
+      "api": {
+        "userApi": {},
+        "groupApi": {},
+        "commentApi": {},
+        "postApi": {}
+      },
+      "auth": {
+        "sportproject5558b517": {
+          "userPoolId": "ap-northeast-2_PWjbHCF0a",
+          "userPoolName": "sport-cog",
+          "webClientId": "bmchqveagd7k1vci9ths6r57r",
+          "nativeClientId": "bmchqveagd7k1vci9ths6r57r"
+        }
+      }
+    }
+  }
+}

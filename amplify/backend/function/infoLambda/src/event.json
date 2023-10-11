@@ -1,0 +1,7 @@
+{
+  "httpMethod": "GET",
+  "path": "/info/team/ars-sc",
+  "headers": {
+    "Content-Type": "application/json"
+  }
+}

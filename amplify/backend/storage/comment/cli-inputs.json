@@ -1,0 +1,10 @@
+{
+  "resourceName": "comment",
+  "tableName": "comment",
+  "partitionKey": {
+    "fieldName": "commentId",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

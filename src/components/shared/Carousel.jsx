@@ -1,78 +1,64 @@
-import React from "react";
-import Slider from "react-slick";
+import React, { useRef, useCallback, useEffect } from "react";
 import {
+  ButtonDiv,
   Card,
   CardWraper,
-  CarouselLayout,
-  Line,
+  NextBtn,
+  PrevBtn,
   SliderContainer,
 } from "../../styles/shared/Carousel.style";
+import {
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+} from "react-icons/bs";
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "red" }}
-      onClick={onClick}
-    />
-  );
-}
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { API } from "aws-amplify";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../states/stateUser";
 
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
-      onClick={onClick}
-    />
-  );
-}
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  arrows: false,
+  dots: false,
+};
+export default function Carousel() {
+  const slickRef = useRef(null);
+  const previous = useCallback(() => slickRef.current.slickPrev(), []);
+  const next = useCallback(() => slickRef.current.slickNext(), []);
+  const userIdState = useRecoilValue(userState);
 
-export default function Carousel({ pTop, pLeft, pWidth, pHeight }) {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
+  const queryClient = useQueryClient();
+  const teamUrl = queryClient.getQueryData(["info"]);
 
   return (
-    <CarouselLayout top={pTop} left={pLeft} width={pWidth} height={pHeight}>
-      <p>My Community</p>
-      <SliderContainer>
-        <Slider {...settings}>
-          <CardWraper>
-            <Card
-              alt="logo"
-              src={process.env.PUBLIC_URL + "/img/rec1.png"}
-            ></Card>
-          </CardWraper>
-          <CardWraper>
-            <Card
-              alt="logo"
-              src={process.env.PUBLIC_URL + "/img/rec1.png"}
-            ></Card>
-          </CardWraper>
-          <CardWraper>
-            <Card
-              alt="logo"
-              src={process.env.PUBLIC_URL + "/img/rec1.png"}
-            ></Card>
-          </CardWraper>
-          <CardWraper>
-            <Card
-              alt="logo"
-              src={process.env.PUBLIC_URL + "/img/rec1.png"}
-            ></Card>
-          </CardWraper>
+    <SliderContainer>
+      {userIdState.userId && (
+        <Slider {...settings} ref={slickRef}>
+          {teamUrl &&
+            teamUrl.map((data, idx) => (
+              <CardWraper key={idx}>
+                <Card $url={`${Object.values(data)[0]}`}></Card>
+              </CardWraper>
+            ))}
         </Slider>
-      </SliderContainer>
-      <Line />
-    </CarouselLayout>
+      )}
+
+      <ButtonDiv>
+        <PrevBtn as={BsFillArrowLeftSquareFill} onClick={previous}>
+          Previous
+        </PrevBtn>
+        <NextBtn as={BsFillArrowRightSquareFill} onClick={next}>
+          Next
+        </NextBtn>
+      </ButtonDiv>
+    </SliderContainer>
   );
 }

@@ -1,0 +1,404 @@
+{
+  "api": {
+    "commentApi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "commentLambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "groupApi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "groupLambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "postApi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "postLambda"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "contentLambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "userApi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "userLambda"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "infoLambda"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "teamLambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "sportproject5558b517": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "function": {
+    "commentLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "comment"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "contentLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "contents"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "groupLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "group"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "infoLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "info"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "postLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "post"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "teamLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "teamInfo"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "userLambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "user"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_sportproject5558b517_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "sportproject5558b517"
+        }
+      ]
+    },
+    "AMPLIFY_auth_sportproject5558b517_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "sportproject5558b517"
+        }
+      ]
+    },
+    "AMPLIFY_auth_sportproject5558b517_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "sportproject5558b517"
+        }
+      ]
+    },
+    "AMPLIFY_auth_sportproject5558b517_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "sportproject5558b517"
+        }
+      ]
+    },
+    "AMPLIFY_function_commentLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "commentLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_commentLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "commentLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_contentLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "contentLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_contentLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "contentLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_groupLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "groupLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_groupLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "groupLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_infoLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "infoLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_infoLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "infoLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_postLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "postLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_postLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "postLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_teamLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "teamLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_teamLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "teamLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_userLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_userLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userLambda"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "comment": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "contents": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "group": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "info": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "post": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "teamInfo": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "user": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}
